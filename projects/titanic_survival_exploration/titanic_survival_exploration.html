@@ -15846,19 +15846,6 @@ height=391
 </div>
 
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span> 
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -15965,6 +15952,17 @@ Make sure to keep track of the various features and conditions you tried before 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>To get the final prediction model, I first used my intuition to see if the class of a person played a role in whether a person survived or not. I performed a split on PClass on both men and women.</p>
+<p>For women, it turns out PClass values of 1 and 2 were more likely to survive, and that there was a high level of entropy for PClass values of 3. I decided to filter on PClass 3 and attempted to find out what additional features I can split on. Since age played a role in survival rates for men, I splitted on Age next. Results showed that discriminated passengers under 20 and 60 to 70 were more likely to survive. This could be attributed to the presumption that women between those two age ranges were probably helping their siblings or spouse survive.</p>
+<p>For Men, over 10. I also wanted to see if class played a role in survival rates for men of PClass = 1 and not having any siblings or spouse. Turns out the men who had fare prices between 20 and 40 were more likely to survive.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#194;&#182;</a></h1><p>After several iterations of exploring and conditioning on the data, you have built a useful algorithm for predicting the survival of each passenger aboard the RMS Titanic. The technique applied in this project is a manual implementation of a simple machine learning model, the <em>decision tree</em>. A decision tree splits a set of data into smaller and smaller groups (called <em>nodes</em>), by one feature at a time. Each time a subset of the data is split, our predictions become more accurate if each of the resulting subgroups are more homogeneous (contain similar labels) than before. The advantage of having a computer do things for us is that it will be more exhaustive and more precise than our manual exploration above. <a href="http://www.r2d3.us/visual-intro-to-machine-learning-part-1/">This link</a> provides another introduction into machine learning using a decision tree.</p>
 <p>A decision tree is just one of many models that come from <em>supervised learning</em>. In supervised learning, we attempt to use features of the data to predict or model things with objective outcome labels. That is to say, each of our data points has a known outcome value, such as a categorical, discrete label like <code>'Survived'</code>, or a numerical, continuous value like predicting the price of a house.</p>
 <h3 id="Question-5">Question 5<a class="anchor-link" href="#Question-5">&#194;&#182;</a></h3><p><em>Think of a real-world scenario where supervised learning could be applied. What would be the outcome variable that you are trying to predict? Name two features about the data used in this scenario that might be helpful for making the predictions.</em></p>
@@ -15976,7 +15974,13 @@ Make sure to keep track of the various features and conditions you tried before 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer</strong>: Predicting whether or not students show up to class. Two features that would be helpful in making the decisions would be temperature change and current grade of student.</p>
+<p><strong>Answer</strong>: 
+Predicting whether or not students show up to class for a given day.</p>
+<p>Two features that would be helpful in making the decisions would be:</p>
+<ol>
+<li>Rate of temperature change from the day before.</li>
+<li>Current grade of the student.</li>
+</ol>
 
 </div>
 </div>
