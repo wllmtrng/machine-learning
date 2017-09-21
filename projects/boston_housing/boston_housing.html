@@ -14803,7 +14803,7 @@ Think about the pros and cons of adding more training points based on if the tra
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer: </strong> For the graph with the max depth of 10, the decision tree model is overfitting on the training data due to the complexity introduced by the high depth value. The decision tree is able to correctly predict based on the points it's seen, but for unseen points the overfitting has created a unecessary complexity in the model that doesn't accurately portray the dataset. Having more training points will not benefit this model.</p>
+<p><strong>Answer: </strong> For the graph with the max depth of 10, the decision tree model is overfitting on the training data due to the complexity introduced by the high depth value. The decision tree is able to correctly predict based on the points it's seen, but for unseen points the overfitting has created a unecessary complexity in the model that doesn't accurately portray the dataset. Having more training points will not have any effect on the training or testing score as more points are added. Training score will stay close to the score of 1.0 while the testing score will most likely plateau at the eyeball estimate of 0.7.</p>
 
 </div>
 </div>
@@ -15882,7 +15882,7 @@ height=335
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong>
 The model is biased when trained with a maximum depth of 1. With a maximum depth of 1, the model is overgeneralizing the dataset. We can also see when that bias is an issue when the score increases for both the training and test set when we increase the depth.</p>
-<p>When the model is trained with the maximum depth of 10, it is suffering from high variance. The model trains perfectly on the training set while the testing score doesn't improve or get worse, indicating poor performance on unseen data.</p>
+<p>When the model is trained with the maximum depth of 10, it is suffering from high variance. Both the training and testing score plateau to a certain score, but there is a gap between their respective scores. This indicates that the problem suffers from high variance.</p>
 
 </div>
 </div>
@@ -15938,7 +15938,8 @@ The maximum depth of 4 results in a model that best generalizes to unseen data. 
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
-<p>The grid search technique performs a search over a permutation of possible parameters to determine the best model, given a dataset split between the training, validation, and test set. For a decision tree we can supply a list of maximum depth to the grid search technique. We run the training set to create the model for each maximum depth on the training set, and pick the best model with the highest score when tested against the validation set. The testing set is used to confirm that the model yields similar performance on additional unseen data.</p>
+<p>The grid search technique performs a search over each combination (cartesian product) of possible parameters to determine the best model given a dataset split between the training, validation, and test set. This is an exhaustive search, changing one parameter at a time for each iteration.</p>
+<p>For a decision tree we can supply a list of maximum depth to the grid search technique. We run the training set to create the model for each maximum depth on the training set, and pick the best model with the highest score when tested against the validation set. The testing set is used to confirm that the model yields similar performance on additional unseen data.</p>
 
 </div>
 </div>
@@ -15964,7 +15965,7 @@ The maximum depth of 4 results in a model that best generalizes to unseen data. 
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
-<p>The k-fold cross-validation training technique partitions the sample set into a number of partitions, denoted by k, evenly. For each k partition, a model with a specific parameter is trained on the k-1 partitions, and tested against the k partition. After all the k partitions are iterated on, we take the average of the errors.</p>
+<p>The k-fold cross-validation training technique partitions the sample set into a number of partitions, denoted by k, evenly. For each k partition, a model with a specific parameter is trained on the k-1 partitions, and tested against the k partition. After all the k partitions are iterated on, we take the average of the errors. Each partition is used exactly k times, once for testing, and k-1 times for training.</p>
 <p>This technique benefits grid search since we can optimize a model by running k-fold cross validation each time on a permutation of parameters. Grid search also benefits from this approach because we aren't restricted to validating parameters on a specific subset of data, which can lead to an overfitted model.</p>
 
 </div>
@@ -16244,6 +16245,7 @@ Client 1's home price of $403,025.00 is reasonable since it has a better poverty
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Sensitivity">Sensitivity<a class="anchor-link" href="#Sensitivity">&#194;&#182;</a></h3><p>An optimal model is not necessarily a robust model. Sometimes, a model is either too complex or too simple to sufficiently generalize to new data. Sometimes, a model could use a learning algorithm that is not appropriate for the structure of the data given. Other times, the data itself could be too noisy or contain too few samples to allow a model to adequately capture the target variable — i.e., the model is underfitted.</p>
+<p>Also a model may suffer from skewed training data. If there are outliers on any end of the dataset, predictions can be pulled too much in a certain direction. For this model, a training set with a very expensive house, with reasons uncaptured by the attributes used, can inaccurately inflate predictions.</p>
 <p><strong>Run the code cell below to run the <code>fit_model</code> function ten times with different training and testing sets to see how the prediction for a specific client changes with respect to the data it's trained on.</strong></p>
 
 </div>
